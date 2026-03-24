@@ -1,0 +1,49 @@
+body {
+    font-family: Arial;
+    margin: 30px;
+    background: #0f172a;
+    color: white;
+}
+
+.upload-box {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    background: #22c55e;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.card {
+    border: 2px solid;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.log-line {
+    padding: 10px;
+    margin: 5px 0;
+    background: #1e293b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.line {
+    font-weight: bold;
+}
+
+.content {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
