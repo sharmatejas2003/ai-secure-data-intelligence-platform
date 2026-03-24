@@ -1,104 +1,165 @@
-## AI Secure Data Intelligence Platform 
-A lightweight security analysis tool that scans logs and text data to detect sensitive information, identify risks, and generate actionable insights.
+# AI Secure Data Intelligence Platform
 
----
-#### What is this?
-This project is built to simulate a real-world security analysis system.
--It takes logs or text input and:
--Detects sensitive data (like passwords, API keys, emails)
--Identifies security risks (like exposed credentials or error leaks)
--Assigns a risk score
--Generates meaningful insights for developers or security teams
+A powerful security analysis platform that scans logs and text data to detect sensitive information, identify vulnerabilities, and generate intelligent insights.
 
 ---
 
-In real systems, logs often accidentally contain sensitive information.
-This tool helps in:
-i). Detecting data leaks early
-ii). Identifying vulnerabilities
-iii). Improving application security
+## Overview
+The **AI Secure Data Intelligence Platform** is designed as a real-world security layer that acts like:
+
+- Data Scanner  
+- Log Analyzer  
+- Risk Engine  
+- Insight Generator  
+
+It helps developers and security teams detect **data leaks, misconfigurations, and security threats** early.
 
 ---
 
-### Key Features
-1>. Smart Detection :-
-Emails
-Passwords
-API Keys
-IP Addresses
+## Key Capabilities
 
-2>. Security Analysis :-
-Credential exposure
-Stack trace leaks
-Brute-force login attempts
+### Smart Detection Engine
+Detects sensitive data such as:
+- Emails  
+- API Keys  
+- Passwords  
+- IP Addresses  
 
-3>. Risk Evaluation :-
-Risk scoring system with level count
-Risk levels: Low/Medium/High
+---
 
-### Insight Generation
-Human-readable security warnings
-Clear explanation of risks
+### Security Risk Detection
+Identifies:
+- Exposed credentials  
+- Stack trace leaks  
+- Debug information exposure  
+- Brute-force login attempts  
+- Suspicious IP activity  
+
+---
+
+### AI-like Insights Engine
+Generates human-readable insights like:
+- “Sensitive credentials exposed in logs”
+- “Multiple failed login attempts detected”
+- “Internal system details leaked via stack trace”
+
+---
+
+### Risk Evaluation System
+- Calculates **risk score**
+- Assigns **risk levels**:
+  - Low  
+  - Medium  
+  - High  
+  - Critical  
+
+---
 
 ### Data Masking
-Sensitive data is automatically hidden in output
+Automatically masks sensitive data:
+- `password=****`
+- `api_key=****`
 
 ---
 
-## How it Works
-Input → Parsing → Detection → Log Analysis → Risk Engine → Insights → Output
+## Multi-Input Support
+
+The system supports:
+- Text input  
+- Log files (`.log`, `.txt`)  
+- Chat-style input  
+- SQL queries  
+
+---
+
+## Architecture Flow
+Input → Parser → Detection Engine → Log Analyzer → Risk Engine → Policy Engine → Insights → Response
+
+
 
 ---
 
 ## Tech Stack
-Backend :FastAPI with Python
-Frontend: HTML, CSS, JavaScript
-API Testing: Swagger UI / Postman
+
+| Layer | Technology |
+|------|----------|
+| Backend | FastAPI (Python) |
+| Frontend | HTML, CSS, JavaScript |
+| API Testing | Swagger UI / Postman |
 
 ---
 
 ## Project Structure
-
 AI_SECURE_PLATFORM/
 │
-├── backend/        
-├── frontend/       
-├── sample_logs/    
+├── backend/
+│ ├── routes/
+│ ├── services/
+│ ├── models/
+│ └── main.py
+│
+├── frontend/
+│ ├── index.html
+│ ├── script.js
+│ └── style.css
+│
+├── sample_logs/
 ├── requirements.txt
 └── README.md
 
 ---
 
+---
 
-### Dependencies Required ->
-1.Install dependencies
-[pip install -r requirements.txt]
+## ⚙️ Setup & Run
 
-2.Run the backend
+### 1 Install Dependencies
+pip install -r requirements.txt
+
+** 2 Run Backend Server**
 cd backend
 uvicorn main:app --reload
 
-3.Open API Docs
+
+** 3 Open API Docs**
 http://127.0.0.1:8000/docs
 
----
+
+**How to Test**
+1. -- Manual Input
+Use /analyze endpoint:
+
+2. -- Select input_type
+Provide text/log input
+
+3. --File Upload
+Use /upload endpoint:
+
+Upload .log or .txt file
+Example Use Case
+
+Input:  email=admin@gmail.com password=admin123 api_key=sk-xyz ERROR failed login 192.168.1.1
 
 
-## Use Cases :-
--Application log monitoring
--Security audits
--Debugging sensitive data leaks
--Pre-deployment checks
+**Output:**
+1>. Sensitive data detected 
+2>. Risk score calculated 
+3>. Insights generated 
+4>. Data masked 
 
 
-## Future Improvements :-
--Real AI integration like LLMs to get deeper insights
--Advanced anomaly detection
--Real-time log streaming
--Better UI dashboard
+**Use Cases**
+i. Application log monitoring
+ii. Security audits
+iii. Debugging sensitive leaks
+iv. Pre-deployment security checks
 
----
+**Future Enhancements**
+i. Real AI/LLM integration
+ii. Real-time log streaming
+iii. Dashboard with charts & analytics
+iv.  Cross-log correlation analysis
 
-## Author
+**Author**
 Tejas Sharma
-E-mail : tejassharma939@gmail.com
+Email: tejasoffical786@gmail.com
