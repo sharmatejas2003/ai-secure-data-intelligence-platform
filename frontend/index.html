@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Security Analyzer</title>
+    <title>AI Secure Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1>🔐 AI Secure Data Intelligence Platform</h1>
 
+<!-- Upload -->
 <div class="upload-box">
     <input type="file" id="fileInput">
-    <button onclick="upload()">Analyze</button>
+    <button onclick="upload()">Upload & Analyze</button>
 </div>
 
+<!-- Text Input -->
+<textarea id="inputText" placeholder="Paste logs or text here..."></textarea>
+
+<select id="inputType">
+    <option value="text">Text</option>
+    <option value="log">Log</option>
+    <option value="sql">SQL</option>
+    <option value="chat">Chat</option>
+</select>
+
+<button onclick="analyze()">Analyze</button>
+
+<hr>
+
+<!-- Dashboard -->
 <div id="dashboard"></div>
 
-<h2>📄 Log Analysis</h2>
+<!-- Logs -->
+<h2>📜 Log Analysis</h2>
 <div id="logOutput"></div>
 
-<h2>⚠ Security Insights</h2>
+<!-- Insights -->
+<h2>🧠 Insights</h2>
 <ul id="insights"></ul>
-
-<script src="script.js"></script>
 
 </body>
 </html>

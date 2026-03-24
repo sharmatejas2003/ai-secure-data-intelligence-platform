@@ -15,6 +15,18 @@ async function upload() {
     renderLogs(data.findings);
     renderInsights(data.insights);
 }
+async function analyze() {
+    const content = document.getElementById("inputText").value;
+    const inputType = document.getElementById("inputType").value;
+
+    const response = await fetch(`http://127.0.0.1:8000/analyze?input_type=${inputType}&content=${encodeURIComponent(content)}`, {
+        method: "POST"
+    });
+
+    const data = await response.json();
+
+    document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+}
 
 function renderDashboard(data) {
     let color = getColor(data.risk_level);
@@ -62,4 +74,11 @@ function getColor(risk) {
     if (risk === "high") return "#f97316";
     if (risk === "medium") return "#eab308";
     return "#22c55e";
+}
+
+function highlight(text) {
+    return text
+        .replace(/password\s*=\s*\S+/gi, "🔴 $&")
+        .replace(/sk-[a-zA-Z0-9]+/g, "🟠 $&")
+        .replace(/\S+@\S+/g, "🟡 $&");
 }
