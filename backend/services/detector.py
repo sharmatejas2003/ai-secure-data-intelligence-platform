@@ -1,57 +1,39 @@
 from utils.patterns import EMAIL_PATTERN, API_KEY_PATTERN, PASSWORD_PATTERN, IP_PATTERN
 
-def detect_patterns(line, line_number, state):
+failed_attempts = 0
+ip_counter = {}
+
+def detect_patterns(line, line_number):
+    global failed_attempts
     findings = []
 
-    # EMAIL
+    line_lower = line.lower()
+
     if EMAIL_PATTERN.search(line):
-        findings.append({
-            "type": "email",
-            "risk": "low",
-            "line": line_number
-        })
+        findings.append({"type": "email", "risk": "low", "line": line_number})
 
-    # PASSWORD
     if PASSWORD_PATTERN.search(line):
-        findings.append({
-            "type": "password",
-            "risk": "critical",
-            "line": line_number
-        })
+        findings.append({"type": "password", "risk": "critical", "line": line_number})
 
-    # API KEY
     if API_KEY_PATTERN.search(line):
-        findings.append({
-            "type": "api_key",
-            "risk": "high",
-            "line": line_number
-        })
+        findings.append({"type": "api_key", "risk": "high", "line": line_number})
 
-    # STACK TRACE / ERROR
-    if "ERROR" in line:
-        findings.append({
-            "type": "stack_trace",
-            "risk": "medium",
-            "line": line_number
-        })
+    if "error" in line_lower:
+        findings.append({"type": "stack_trace", "risk": "medium", "line": line_number})
 
-    # FAILED LOGIN TRACKING (SMART WAY)
-    if "failed login" in line.lower():
-        state["failed_login_count"] += 1
+    if "failed login" in line_lower:
+        failed_attempts += 1
+        if failed_attempts >= 3:
+            findings.append({"type": "brute_force", "risk": "high", "line": line_number})
 
-        if state["failed_login_count"] >= 3:
-            findings.append({
-                "type": "brute_force",
-                "risk": "high",
-                "line": line_number
-            })
+    ip_match = IP_PATTERN.search(line)
+    if ip_match:
+        ip = ip_match.group()
+        ip_counter[ip] = ip_counter.get(ip, 0) + 1
 
-    # IP DETECTION
-    if IP_PATTERN.search(line):
-        findings.append({
-            "type": "ip_address",
-            "risk": "low",
-            "line": line_number
-        })
+        findings.append({"type": "ip_address", "risk": "low", "line": line_number})
+
+        if ip_counter[ip] > 3:
+            findings.append({"type": "suspicious_ip", "risk": "high", "line": line_number})
 
     return findings

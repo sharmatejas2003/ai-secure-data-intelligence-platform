@@ -1,59 +1,43 @@
-from fastapi import APIRouter, UploadFile, File
-from services.parser import parse_input
-from services.log_analyzer import analyze_logs
+from fastapi import APIRouter
+from services.parser import parse_text
+from services.detector import detect_patterns
 from services.risk_engine import calculate_risk
 from services.insights import generate_insights
-from services.masker import mask_sensitive_data
+from services.masker import mask_data
+from services.policy_engine import apply_policy
 
 router = APIRouter()
 
-# ✅ FILE UPLOAD API (MAIN)
-@router.post("/upload")
-async def upload_file(file: UploadFile = File(...)):
-    content = (await file.read()).decode("utf-8")
+@router.post("/analyze")
+def analyze(input_type: str, content: str):
 
-    parsed = parse_input(content)
-
-    findings = analyze_logs(parsed)
-
-    score, level = calculate_risk(findings)
-
-    insights = generate_insights(findings)
-
-    masked_content = mask_sensitive_data(parsed)
-
-    return {
-        "summary": "File analyzed successfully",
-        "content_type": "log",
-        "findings": findings,
-        "risk_score": score,
-        "risk_level": level,
-        "action": "masked",
-        "insights": insights,
-        "masked_content": masked_content
+    options = {
+        "mask": True,
+        "block_high_risk": True,
+        "log_analysis": True
     }
 
+    lines = parse_text(content)
 
-# ✅ TEXT INPUT API (OPTIONAL)
-@router.post("/analyze")
-async def analyze_text(content: str):
-    parsed = parse_input(content)
+    findings = []
+    for i, line in enumerate(lines, start=1):
+        findings.extend(detect_patterns(line, i))
 
-    findings = analyze_logs(parsed)
+    risk_score, risk_level = calculate_risk(findings)
 
-    score, level = calculate_risk(findings)
+    action = apply_policy(risk_level, options)
 
     insights = generate_insights(findings)
 
-    masked_content = mask_sensitive_data(parsed)
+    masked_content = mask_data(content) if action == "masked" else content
 
     return {
         "summary": "Analysis completed",
-        "content_type": "text",
+        "content_type": input_type,
         "findings": findings,
-        "risk_score": score,
-        "risk_level": level,
-        "action": "masked",
+        "risk_score": risk_score,
+        "risk_level": risk_level,
+        "action": action,
         "insights": insights,
         "masked_content": masked_content
     }
