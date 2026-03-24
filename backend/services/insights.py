@@ -1,24 +1,23 @@
 def generate_insights(findings):
     insights = []
-
     types = [f["type"] for f in findings]
 
     if "password" in types:
-        insights.append("Critical: Plaintext passwords detected. Risk of account compromise.")
+        insights.append("🚨 Critical: Plaintext passwords detected. Immediate action required.")
 
     if "api_key" in types:
-        insights.append("High Risk: API keys exposed. Unauthorized access possible.")
+        insights.append("🔐 API keys exposed. This may lead to unauthorized access.")
 
     if "stack_trace" in types:
-        insights.append("Medium Risk: Stack traces reveal internal system structure.")
+        insights.append("⚠️ Stack traces reveal internal system architecture.")
 
     if "brute_force" in types:
-        insights.append("Alert: Multiple failed login attempts detected.")
+        insights.append("🚨 Multiple failed login attempts detected (possible brute-force attack).")
 
     if "ip_address" in types:
-        insights.append("Info: IP addresses found in logs.")
+        insights.append("🌐 Multiple IP addresses found. Check for suspicious activity.")
 
     if not insights:
-        insights.append("No major threats detected. Logs appear safe.")
+        insights.append("✅ No major threats detected. Logs appear safe.")
 
     return insights
