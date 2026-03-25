@@ -53,10 +53,10 @@ async def upload_file(file: UploadFile = File(...)):
     content = await file.read()
     content = content.decode("utf-8")
 
-    from services.log_analyzer import analyze_logs
-    from services.risk_engine import calculate_risk
-    from services.insights import generate_insights
-    from services.masker import mask_data
+    from backend.services.log_analyzer import analyze_logs
+    from backend.services.risk_engine import calculate_risk
+    from backend.services.insights import generate_insights
+    from backend.services.masker import mask_data
 
     findings = analyze_logs(content)
     score, level = calculate_risk(findings)
