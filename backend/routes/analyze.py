@@ -1,12 +1,12 @@
 from fastapi import APIRouter, UploadFile, File
-from services.parser import parse_text
-from services.detector import detect_patterns
-from services.risk_engine import calculate_risk
-from services.insights import generate_insights
-from services.masker import mask_data
-from services.policy_engine import apply_policy
-from services.parser import parse_by_type
-from services.log_analyzer import analyze_logs
+from backend.services.parser import parse_text
+from backend.services.detector import detect_patterns
+from backend.services.risk_engine import calculate_risk
+from backend.services.insights import generate_insights
+from backend.services.masker import mask_data
+from backend.services.policy_engine import apply_policy
+from backend.services.parser import parse_by_type
+from backend.services.log_analyzer import analyze_logs
 
 
 router = APIRouter()

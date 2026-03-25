@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes.analyze import router
+from backend.routes.analyze import router
 
 app = FastAPI(title="AI Secure Data Intelligence Platform")
 

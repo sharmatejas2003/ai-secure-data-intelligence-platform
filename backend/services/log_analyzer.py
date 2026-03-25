@@ -1,4 +1,4 @@
-from services.detector import detect_patterns
+from backend.services.detector import detect_patterns
 import re
 
 # Proper IP regex

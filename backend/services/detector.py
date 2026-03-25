@@ -1,4 +1,4 @@
-from utils.patterns import EMAIL_PATTERN, API_KEY_PATTERN, PASSWORD_PATTERN, IP_PATTERN
+from backend.utils.patterns import EMAIL_PATTERN, API_KEY_PATTERN, PASSWORD_PATTERN, IP_PATTERN
 
 failed_attempts = 0
 ip_counter = {}
